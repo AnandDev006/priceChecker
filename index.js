@@ -3,7 +3,6 @@ const cheerio = require('cheerio');
 const nodemailer = require('nodemailer');
 const mongoose = require('mongoose');
 
-const { MAIL_PASSWORD, MONGO_PASSWORD } = require('./configurations');
 const URLs = require('./URLSchema');
 
 const getPrice = async productURL => {
@@ -22,7 +21,7 @@ const sendMail = async (to, subject, body) => {
 		service: 'gmail',
 		auth: {
 			user: 'anand.dev.006@gmail.com',
-			pass: MAIL_PASSWORD,
+			pass: process.env.MAIL_PASSWORD,
 		},
 	});
 
@@ -60,7 +59,9 @@ const poll = async interval => {
 	try {
 		setTimeout(async function repeat() {
 			await mongoose.connect(
-				`mongodb+srv://anand:${MONGO_PASSWORD}@products-qjo91.mongodb.net/test?retryWrites=true&w=majority`,
+				`mongodb+srv://anand:${
+					process.env.MONGO_PASSWORD
+				}@products-qjo91.mongodb.net/test?retryWrites=true&w=majority`,
 				{ useNewUrlParser: true }
 			);
 
