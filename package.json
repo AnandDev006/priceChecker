@@ -9,7 +9,6 @@
     "request-promise": "^4.2.4"
   },
   "scripts": {
-    "dev": "nodemon index.js",
     "start": "node index.js"
   }
 }
